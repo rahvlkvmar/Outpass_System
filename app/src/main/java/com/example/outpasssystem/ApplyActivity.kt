@@ -38,19 +38,29 @@ class ApplyActivity : AppCompatActivity() {
             else{
                 val uniqueID = mAuth.currentUser?.uid!!
                 database = FirebaseDatabase.getInstance().getReference("Users")
-                database.child(uniqueID).get().addOnSuccessListener {
-                    val sno  = it.child("serialno").getValue(Int::class.java)!!
-                    val newNo = sno + 1
-                    val newVal = mapOf<String, Int>("serialno" to newNo)
-                    database.child(uniqueID).updateChildren(newVal)
+                database.child("GlobalSNo").get().addOnSuccessListener { it1 ->
+                    val sno = it1.getValue(Int::class.java)!!
+                    database.child("GlobalSNo").setValue(sno+1)
                     database = FirebaseDatabase.getInstance().getReference("Outpasses")
                     val newOutpass = Outpass(leaveDT, arriveDT, modeTranport, purposeOfVisit, "Pending")
                     database.child(uniqueID).child(sno.toString()).setValue(newOutpass)
-                    //create a global variable serial number and a new branch for AdminOutpass which stores every
-                    //outpass that is generated and deletes every outpass that is approved or rejected
+
+                    database = FirebaseDatabase.getInstance().getReference("Users")
+                    database.child(uniqueID).get().addOnSuccessListener {
+                        val cU = it.getValue(User::class.java)
+                        database = FirebaseDatabase.getInstance().getReference("Admin")
+                        //create an object and set all values required values for Admin branch
+                        val adminOutpass  = AdminOutpassRV(sno, cU?.name, cU?.rollno, cU?.hostel,
+                            cU?.roomno, cU?.phoneno, cU?.parentname, cU?.parentno, leaveDT,
+                            arriveDT, modeTranport, purposeOfVisit, uniqueID)
+                        database.child(sno.toString()).setValue(adminOutpass)
+                    }
+
+                    Toast.makeText(this, "Your request has been received!", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
-                Toast.makeText(this, "Your request has been received!", Toast.LENGTH_SHORT).show()
-                finish()
+
+
             }
         }
 
