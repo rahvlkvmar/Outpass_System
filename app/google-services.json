@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "269118856252",
+    "project_id": "outpass-system-76967",
+    "storage_bucket": "outpass-system-76967.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269118856252:android:d9ece96bbec2c8ff2eb739",
+        "android_client_info": {
+          "package_name": "com.example.outpasssystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269118856252-qch44da2rccad1mfh4du35sba25im7iv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByQvID8iyYoiU36vszsGdyghhyl4E0XGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269118856252-qch44da2rccad1mfh4du35sba25im7iv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
