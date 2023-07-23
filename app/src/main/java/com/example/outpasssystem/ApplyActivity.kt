@@ -39,21 +39,21 @@ class ApplyActivity : AppCompatActivity() {
                 val uniqueID = mAuth.currentUser?.uid!!
                 database = FirebaseDatabase.getInstance().getReference("Users")
                 database.child("GlobalSNo").get().addOnSuccessListener { it1 ->
-                    val sno = it1.getValue(Int::class.java)!!
-                    database.child("GlobalSNo").setValue(sno+1)
+                    val sNo = it1.getValue(Int::class.java)!!
+                    database.child("GlobalSNo").setValue(sNo+1)
                     database = FirebaseDatabase.getInstance().getReference("Outpasses")
                     val newOutpass = Outpass(leaveDT, arriveDT, modeTranport, purposeOfVisit, "Pending")
-                    database.child(uniqueID).child(sno.toString()).setValue(newOutpass)
+                    database.child(uniqueID).child(sNo.toString()).setValue(newOutpass)
 
                     database = FirebaseDatabase.getInstance().getReference("Users")
                     database.child(uniqueID).get().addOnSuccessListener {
                         val cU = it.getValue(User::class.java)
                         database = FirebaseDatabase.getInstance().getReference("Admin")
                         //create an object and set all values required values for Admin branch
-                        val adminOutpass  = AdminOutpassRV(sno, cU?.name, cU?.rollno, cU?.hostel,
+                        val adminOutpass  = AdminOutpassRV(sNo.toString(), cU?.name, cU?.rollno, cU?.hostel,
                             cU?.roomno, cU?.phoneno, cU?.parentname, cU?.parentno, leaveDT,
                             arriveDT, modeTranport, purposeOfVisit, uniqueID)
-                        database.child(sno.toString()).setValue(adminOutpass)
+                        database.child(sNo.toString()).setValue(adminOutpass)
                     }
 
                     Toast.makeText(this, "Your request has been received!", Toast.LENGTH_SHORT).show()
