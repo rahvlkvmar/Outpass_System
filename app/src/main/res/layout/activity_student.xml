@@ -148,7 +148,7 @@
         android:shadowDx="1.5"
         android:shadowDy="1.3"
         android:shadowRadius="1.6"
-        android:text="Out-of-Campus\nPass Status"
+        android:text="Outpass Status"
         android:textAlignment="viewStart"
         android:textColor="@android:color/white"
         android:textSize="40sp"
